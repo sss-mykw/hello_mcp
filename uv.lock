@@ -100,7 +100,7 @@ dependencies = [
 ]
 
 [package.metadata]
-requires-dist = [{ name = "fastmcp", specifier = ">=2.5.0" }]
+requires-dist = [{ name = "fastmcp", specifier = ">=2.5.0,<2.6.0" }]
 
 [[package]]
 name = "httpcore"
