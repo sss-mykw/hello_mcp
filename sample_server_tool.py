@@ -1,7 +1,7 @@
 import asyncio
 
 import aiohttp
-from fastmcp import FastMCP
+from fastmcp import FastMCP, Context
 from fastmcp.exceptions import ToolError
 from pydantic import Field
 
@@ -94,6 +94,31 @@ def divide(a: float, b: float) -> float:
 def calculate_sum(a: float, b: float) -> float:
     """Add two numbers together."""
     return a + b
+
+
+# [MCP Context]
+# 詳しくは別の機会に
+# 引数にContextを追加すれば使えるらしい
+@mcp.tool()
+async def process_data(data_uri: str, ctx: Context) -> dict:
+    """Process data from a resource with progress reporting."""
+    await ctx.info(f"Processing data from {data_uri}")
+
+    # Read a resource
+    resource = await ctx.read_resource(data_uri)
+    data = resource[0].content if resource else ""
+
+    # Report progress
+    await ctx.report_progress(progress=50, total=100)
+
+    # Example request to the client's LLM for help
+    summary = await ctx.sample(f"Summarize this in 10 words: {data[:200]}")
+
+    await ctx.report_progress(progress=100, total=100)
+    return {
+        "length": len(data),
+        "summary": summary.text
+    }
 
 
 # [Server Behavior]
