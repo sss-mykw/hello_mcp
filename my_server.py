@@ -1,6 +1,7 @@
 import asyncio
 from fastmcp import FastMCP
 
+# これらの設定はFASTMCP_SERVER_というプレフィクスが付いた環境変数や.envファイルから読み込む事も出来るらしい
 mcp = FastMCP(
     # 名前を付けることでクライアント側やログからサーバーを特定するのに役立つ
     name="HelpfulAssistant",
@@ -49,3 +50,8 @@ if __name__ == "__main__":
 
     # To use a different transport, e.g., HTTP:
     # mcp.run(transport="streamable-http", host="127.0.0.1", port=9000)
+
+    # [Server Configuration]
+    # Settings are accessible via mcp.settings
+    print(mcp.settings.port)  # Output: 8080
+    print(mcp.settings.on_duplicate_tools)  # Output: "error"
