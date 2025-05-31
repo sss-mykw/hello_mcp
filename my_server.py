@@ -34,6 +34,10 @@ def analyze_data(data_points: list[float]) -> str:
     return f"Please analyze these data points: {formatted_data}"
 
 
+# [Composing Servers]
+# Composing Serversで勉強するのでスキップ
+
+
 if __name__ == "__main__":
     # トランスポートの選択はSTDIOまたはStreamable HTTPがおすすめ（SSEは非推奨らしい）
     # This runs the server, defaulting to STDIO transport
