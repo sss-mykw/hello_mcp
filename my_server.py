@@ -1,5 +1,10 @@
-import asyncio
+import yaml
 from fastmcp import FastMCP
+
+# Define a custom serializer that formats dictionaries as YAML
+def yaml_serializer(data):
+    # もしシリアライザー関数内で例外が起きた場合、デフォルトのjson形式で返却される
+    return yaml.dump(data, sort_keys=False)
 
 # これらの設定はFASTMCP_SERVER_というプレフィクスが付いた環境変数や.envファイルから読み込む事も出来るらしい
 mcp = FastMCP(
@@ -9,7 +14,9 @@ mcp = FastMCP(
     instructions="""
         This server provides data analysis tools.
         Call get_average() to analyze numerical data.
-        """
+        """,
+    # String型以外の返り値に適用される。String型は適用されずにそのまま返却される。
+    tool_serializer=yaml_serializer
 )
 
 @mcp.tool()
