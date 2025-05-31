@@ -1,3 +1,5 @@
+import time
+
 import yaml
 from fastmcp import FastMCP
 
@@ -21,6 +23,7 @@ mcp = FastMCP(
 
 @mcp.tool()
 def greet(name: str) -> str:
+    time.sleep(1)
     return f"Hello, {name}!"
 
 
