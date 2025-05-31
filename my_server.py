@@ -22,10 +22,13 @@ mcp = FastMCP(
 )
 
 @mcp.tool()
-def greet(name: str) -> str:
-    time.sleep(1)
+def greet(name: str, duration_time_second: float) -> str:
+    time.sleep(duration_time_second)
     return f"Hello, {name}!"
 
+@mcp.tool()
+def divide(a:int, b:int) -> float:
+    return a / b
 
 # [Components]
 
