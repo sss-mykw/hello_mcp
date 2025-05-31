@@ -18,6 +18,10 @@ async def main():
         # Make MCP calls within the context
         tools = await client.list_tools()
         print(f"Available tools: {tools}")
+        # Raw MCP Protocol Objects
+        # デバッグ用途で使用するかもしれない
+        raw_result = await client.list_tools_mcp()
+        print(f"raw_result: {raw_result}")
 
         target_tool_name = "greet"
         if any(tool.name == target_tool_name for tool in tools):
