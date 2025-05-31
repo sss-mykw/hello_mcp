@@ -1,3 +1,5 @@
+import os
+
 from fastmcp import Client, FastMCP
 
 # FastMCPのアーキテクチャはトランスポートをプロトコルロジックから分離するようにしていいる
@@ -8,7 +10,9 @@ from fastmcp import Client, FastMCP
 client_in_memory = Client(FastMCP(name="TestServer"))
 client_http = Client("https://example.com/mcp")
 # サンプルコードとファイル名が異なる点に注意
-client_stdio = Client("../../my_server.py")
+base_dir = os.path.dirname(os.path.abspath(__file__))
+file_path = os.path.join(base_dir, '..', '..', 'my_server.py')
+client_stdio = Client(file_path)
 config = {
     "mcpServers": {
         "local": {"command": "python", "args": ["local_server.py"]},
