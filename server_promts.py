@@ -21,3 +21,13 @@ def generate_code_request(language: str, task_description: str) -> PromptMessage
     return PromptMessage(role="user", content=TextContent(type="text", text=content))
 
 # promptでは*argsまたは**kwargsをサポートしていないことに注意
+
+# Return Values
+# list[PromptMessage | str]は会話型向き
+@mcp.prompt()
+def roleplay_scenario(character: str, situation: str) -> list[Message]:
+    """Sets up a roleplaying scenario with initial messages."""
+    return [
+        Message(f"Let's roleplay. You are {character}. The situation is: {situation}"),
+        Message("Okay, I understand. I am ready. What happens next?", role="assistant")
+    ]
