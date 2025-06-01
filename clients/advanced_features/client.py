@@ -20,10 +20,19 @@ async def log_handler(message: LogMessage):
     data = message.data
     print(f"[Server Log - {level}] {logger}: {data}")
 
+# Progress Monitoring
+async def my_progress_handler(
+    progress: float,
+    total: float | None,
+    message: str | None
+) -> None:
+    print(f"Progress: {progress} / {total} ({message})")
+
 
 client = Client(
     server,
     log_handler=log_handler,
+    progress_handler=my_progress_handler,
 )
 
 async def main():
