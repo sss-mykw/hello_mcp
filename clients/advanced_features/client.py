@@ -1,7 +1,13 @@
+import marvin
 from fastmcp import FastMCP, Client
 import asyncio
 
 from fastmcp.client.logging import LogMessage
+from fastmcp.client.sampling import (
+    SamplingMessage,
+    SamplingParams,
+    RequestContext,
+)
 
 # [Advanced Features]
 
@@ -28,11 +34,23 @@ async def my_progress_handler(
 ) -> None:
     print(f"Progress: {progress} / {total} ({message})")
 
+# LLM Sampling
+async def sampling_handler(
+    messages: list[SamplingMessage],
+    params: SamplingParams,
+    context: RequestContext
+) -> str:
+    return await marvin.say_async(
+        message=[m.content.text for m in messages],
+        instructions=params.systemPrompt,
+    )
+
 
 client = Client(
     server,
     log_handler=log_handler,
     progress_handler=my_progress_handler,
+    sampling_handler=sampling_handler,
 )
 
 async def main():
