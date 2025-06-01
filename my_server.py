@@ -62,7 +62,9 @@ if __name__ == "__main__":
     mcp.run()
 
     # To use a different transport, e.g., HTTP:
-    # mcp.run(transport="streamable-http", host="127.0.0.1", port=9000)
+    # ターミナルでの実行コマンド「fastmcp run my_server.py --transport streamable-http --port 8000」
+    # pythonではなくfastmcp runを用いて動かすと__main__が実行されないことに注意
+    # mcp.run(transport="streamable-http", host="127.0.0.1", port=8000, path="/my-custom-path")
 
     # [Server Configuration]
     # Settings are accessible via mcp.settings
