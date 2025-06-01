@@ -1,6 +1,8 @@
 from fastmcp import FastMCP, Client
 import asyncio
 
+from fastmcp.client.logging import LogMessage
+
 # [Advanced Features]
 
 server = FastMCP(name="InMemoryServer")
@@ -11,7 +13,18 @@ def ping():
 
 #----------------Server–client boundary----------------
 
-client = Client(server)
+# Logging and Notifications
+async def log_handler(message: LogMessage):
+    level = message.level.upper()
+    logger = message.logger or 'default'
+    data = message.data
+    print(f"[Server Log - {level}] {logger}: {data}")
+
+
+client = Client(
+    server,
+    log_handler=log_handler,
+)
 
 async def main():
     async with client:
