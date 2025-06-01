@@ -59,12 +59,12 @@ def analyze_data(data_points: list[float]) -> str:
 if __name__ == "__main__":
     # トランスポートの選択はSTDIOまたはStreamable HTTPがおすすめ（SSEは非推奨らしい）
     # This runs the server, defaulting to STDIO transport
-    # mcp.run()
+    mcp.run()
 
     # To use a different transport, e.g., HTTP:
     # ターミナルでの実行コマンド「fastmcp run my_server.py --transport streamable-http --port 8000」
     # pythonではなくfastmcp runを用いて動かすと__main__が実行されないことに注意
-    mcp.run(transport="streamable-http", host="127.0.0.1", port=8000, path="/my-custom-path")
+    # mcp.run(transport="streamable-http", host="127.0.0.1", port=8000, path="/my-custom-path")
 
     # [Server Configuration]
     # Settings are accessible via mcp.settings
